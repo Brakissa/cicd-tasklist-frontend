@@ -35,6 +35,11 @@ junit*.xml
 .env.test.local
 .env.production.local
 
+# Security reports and SBOM
+sbom*.json
+.trivyignore
+.trivy.yaml
+
 # TypeScript cache
 *.tsbuildinfo
 
