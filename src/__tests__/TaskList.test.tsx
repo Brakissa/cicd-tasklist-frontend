@@ -53,7 +53,70 @@ describe('TaskList', () => {
 		expect(screen.getByText('Première tâche')).toBeInTheDocument();
 		expect(screen.getByText('Deuxième tâche')).toBeInTheDocument();
 		expect(screen.getByText('2 tâches')).toBeInTheDocument();
+		expect(screen.getByText('1 terminée')).toBeInTheDocument();
 	});
 
-	// ... TODO: Add more tests
+	it('shows error state', () => {
+		render(
+			<TaskList
+				tasks={[]}
+				loading={false}
+				error="Une erreur est survenue"
+				onToggle={vi.fn()}
+				onDelete={vi.fn()}
+				onEdit={vi.fn()}
+			/>
+		);
+		expect(screen.getByTestId('error')).toBeInTheDocument();
+		expect(screen.getByText('Erreur : Une erreur est survenue')).toBeInTheDocument();
+	});
+
+	it('shows empty state when no tasks', () => {
+		render(
+			<TaskList
+				tasks={[]}
+				loading={false}
+				error={null}
+				onToggle={vi.fn()}
+				onDelete={vi.fn()}
+				onEdit={vi.fn()}
+			/>
+		);
+		expect(screen.getByTestId('empty')).toBeInTheDocument();
+		expect(screen.getByText('Aucune tâche')).toBeInTheDocument();
+	});
+
+	it('displays singular task count correctly', () => {
+		const singleTask: Task[] = [mockTasks[0]];
+		render(
+			<TaskList
+				tasks={singleTask}
+				loading={false}
+				error={null}
+				onToggle={vi.fn()}
+				onDelete={vi.fn()}
+				onEdit={vi.fn()}
+			/>
+		);
+		expect(screen.getByText('1 tâche')).toBeInTheDocument();
+	});
+
+	it('displays multiple completed tasks correctly', () => {
+		const allCompleted: Task[] = [
+			{ ...mockTasks[0], completed: true },
+			{ ...mockTasks[1], completed: true },
+		];
+		render(
+			<TaskList
+				tasks={allCompleted}
+				loading={false}
+				error={null}
+				onToggle={vi.fn()}
+				onDelete={vi.fn()}
+				onEdit={vi.fn()}
+			/>
+		);
+		expect(screen.getByText('2 tâches')).toBeInTheDocument();
+		expect(screen.getByText('2 terminées')).toBeInTheDocument();
+	});
 });
