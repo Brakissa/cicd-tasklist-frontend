@@ -44,3 +44,5 @@ sbom*.json
 *.tsbuildinfo
 
 .scannerwork/
+
+sonar-project.properties
