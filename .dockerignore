@@ -1,0 +1,26 @@
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+dist
+coverage
+coverage/
+*.lcov
+reports/
+reports
+.env
+.env.*
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+sonar-project.properties
+
+.idea
+.vscode
+*.log
+
+# CI / tools
+sbom-cyclonedx.json
